@@ -54,27 +54,28 @@
   <audio data-key="74" src="sounds/snare.wav"></audio>
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
-
   <script>
+  // 按下键盘触发playSound函数
   window.addEventListener('keydown', playSound);
-  const keys = Array.from(document.querySelectorAll('.key'));  //Array.from方法将类数组对象和可迭代对象转换为真正的数组
-  //transitionend方法在transition属性完成时激活
-  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  
-  function playSound(e) {
-    console.log(e.keyCode);
-    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);  //获取当前按下键位一致的按钮
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);  //获取与当前按下键位一致的audio元素
-    if(!audio) return;  //如果按下无意义的键位，返回
 
-    key.classList.add('playing');
-    audio.currentTime = 0;  //每次按下键位时从0开始播放
+  function playSound(e) {
+    //选出与按下键位相匹配的div与声音
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    const audio  = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+
+    if(!audio) return;  //不存在声音则返回
+    audio.currentTime = 0;  //每次触发，音乐都从开头播放
     audio.play();
+    key.classList.add('playing');  //添加样式，按下键位时作出相应改变
   }
 
+  const keys = Array.from(document.querySelectorAll('.key'));  //将所有的div放入一个数组
+  //每次transition动画结束的时候触发removeTransition事件
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
   function removeTransition(e) {
-    if(e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing');
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');  //移除palying类名
   }
   </script>
 </body>
