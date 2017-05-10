@@ -6,8 +6,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -58,8 +56,26 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
   <script>
+  window.addEventListener('keydown', playSound);
+  const keys = Array.from(document.querySelectorAll('.key'));  //Array.from方法将类数组对象和可迭代对象转换为真正的数组
+  //transitionend方法在transition属性完成时激活
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  
+  function playSound(e) {
+    console.log(e.keyCode);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);  //获取当前按下键位一致的按钮
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);  //获取与当前按下键位一致的audio元素
+    if(!audio) return;  //如果按下无意义的键位，返回
 
+    key.classList.add('playing');
+    audio.currentTime = 0;  //每次按下键位时从0开始播放
+    audio.play();
+  }
+
+  function removeTransition(e) {
+    if(e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
   </script>
-
 </body>
 </html>
