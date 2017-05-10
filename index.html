@@ -11,6 +11,7 @@
     padding: 0;
     margin: 0;
     text-align: center;
+    background:url(bg.jpg) top center no-repeat;
   }
   strong {
     color: #ffc600;
@@ -20,8 +21,8 @@
     text-shadow: 0 1px 1px #333;
     background-color: #000;
     font-size: 24px;
-    height: 50px;
-    line-height: 50px;
+    height: 60px;
+    line-height: 60px;
     margin: 0;
   }
   ul {
@@ -42,9 +43,9 @@
     height: 40px;
     line-height: 40px;
     color: #666;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, .7);
     text-decoration: none;
-    border-radius: 3px;
+    border-radius: 4px;
     box-shadow: 0 0 1px #333;
     letter-spacing: 2px;
     padding: 10px;
@@ -52,18 +53,43 @@
     transition: .1s ease-in;
   }
   ul li a:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
     color: #555;
+    background: rgba(255, 255, 255, .85);
     box-shadow:  0 0 30px #ccc;
+  }
+  footer {
+    width: 100%;
+    position: fixed;bottom: 0;
+    text-align: center;
+    color: #999;
+    font-size: 12px;
+    background: rgba(0, 0, 0, .7);
+  }
+  footer a {
+    text-decoration: none;
+    color: #eee;
+  }
+  footer p {
+    line-height: .8;
+  }
+  footer a:hover {
+    text-decoration: underline;
   }
   </style>
 </head>
 <body>
-  <h1>JavaScript30——<strong>30</strong>天纯<strong> JavaScript </strong>编程练习</h1>
+  <header>
+    <h1>JavaScript30——<strong>30</strong>天纯<strong> JavaScript </strong>编程练习</h1>
+  </header>
   <ul>
     <li><a href="01 - JavaScript Drum Kit\index-START.html">打鼓效果</a></li>
     <li><a href="02 - JS + CSS Clock\index-START.html">HTML + CSS时钟效果</a></li>
     <li><a href="03 - CSS Variables\index-START.html">CSS变量实现拖动控制参数效果</a></li>
   </ul>
+  <footer>
+    <p>本项目来自于<a href="http://wesbos.com/" target="_blank"> WesBos </a>的<a href="https://javascript30.com/" target="_blank"> JavaScript30 </a>计划</p>
+    <p>感谢<a href="https://github.com/soyaine/JavaScript30" target="_blank">soyaine</a>的中文指南.</p>
+  </footer>
 </body>
 </html>
