@@ -6,7 +6,7 @@
 </head>
 <body>
 
-
+    <h1>HTML+CSS模拟<br>时钟效果</h1>
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
@@ -18,7 +18,7 @@
 
   <style>
     html {
-      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+      background:#018DED url(background.jpg);
       background-size:cover;
       font-family:'helvetica neue';
       text-align: center;
@@ -29,8 +29,13 @@
       font-size: 2rem;
       display:flex;
       flex:1;
-      min-height: 100vh;
+      height: 100%;
       align-items: center;
+    }
+
+    h1 {
+      color: #668;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
     }
 
     .clock {
@@ -47,6 +52,21 @@
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
     }
+    .clock::after {
+      content: "";
+      width: 1.2rem;
+      height: 1.2rem;
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%; left: 50%;
+      background-color: #a8c5d1;
+      font-size: 30px;
+      color: #000;
+      transform: translate(-50%, -50%);
+      z-index: 999;
+      box-shadow: 2px 4px 1px rgba(0, 0, 0, .5);
+    }
 
     .clock-face {
       position: relative;
@@ -58,16 +78,63 @@
     .hand {
       width:50%;
       height:6px;
-      background:black;
+      background: black;
+      box-shadow: 2px 4px 1px rgba(0, 0, 0, .5);
       position: absolute;
-      top:50%;
+      top:50%; right: 50%;
+      transition: all 0.5s;
+      transform-origin: right;
+      transform: rotate(90deg);
+      transition-timing-function: cubic-bezier(0.9, 0.54, 0.26, 1.68);
+    }
+
+    .second-hand {
+      height: 2px;
+      background: linear-gradient(to left, green, #eee);
+      border-radius: 2px 0 0 2px;
+      margin-top: 2px;
+    }
+    .min-hand {
+      height: 6px;
+      width: 45%;
+      background-color: #fff;
+      border-radius: 50% 0 0 50%;
+    }
+    .hour-hand {
+      width: 35%;
+      height: 8px;
+      border-radius: 20px 0 0 20px;
+      background-color: #fff;
     }
 
   </style>
 
   <script>
+  //根据当前时间来确定三针位置
+  window.onload = setTime;
 
+  //使用定时器每秒更新时间
+  const second_hand = document.querySelector('.second-hand');
+  const min_hand = document.querySelector('.min-hand');
+  const hour_hand = document.querySelector('.hour-hand');
 
+  setInterval(setTime, 1000);
+
+  function setTime() {
+    const date = new Date();
+    const currentSecond = date.getSeconds();
+    const currentMinute = date.getMinutes();
+    const currentHour = date.getHours();
+
+    const secondDeg = (90 + (currentSecond / 60) * 360);
+    const minuteDeg = (90 + (currentMinute / 60) * 360);
+    const hourDeg = (90 + (currentHour / 12) * 360 + (currentMinute / 12 / 60) * 360);
+    second_hand.style.transform = `rotate(${ secondDeg }deg)`;
+    min_hand.style.transform = `rotate(${ minuteDeg }deg)`;
+    hour_hand.style.transform = `rotate(${ hourDeg }deg)`;
+    console.log(`${currentHour}:${currentMinute}:${currentSecond} - ${hourDeg}:${minuteDeg}:${secondDeg}` );
+
+  }
   </script>
 </body>
 </html>
