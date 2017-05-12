@@ -57,16 +57,16 @@
     }
     .clock::after {
       content: "";
+      display: block;
       width: 1.2rem;
       height: 1.2rem;
-      display: block;
       border-radius: 50%;
       position: absolute;
       top: 50%; left: 50%;
-      background-color: #a8c5d1;
+      transform: translate(-50%, -50%);
+      background-color: #e4e4e4;
       font-size: 30px;
       color: #000;
-      transform: translate(-50%, -50%);
       z-index: 999;
       box-shadow: 2px 4px 1px rgba(0, 0, 0, .5);
     }

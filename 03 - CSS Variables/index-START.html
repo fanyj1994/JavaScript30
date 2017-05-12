@@ -17,15 +17,18 @@
     <label for="base">Base Color</label>
     <input type="color" name="base" value="#ffc600">
   </div>
+  <div class="styleMsg">img { padding: 10px; filter: blur(0px); background: #ffc600;}</div>
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
-
     /*
       misc styles, nothing to do with CSS variables
     */
-
+    :root {
+      --first-bgc: #ffc600;
+      --first-padding: 10px;
+    }
     body {
       text-align: center;
     }
@@ -38,17 +41,60 @@
       font-size: 50px;
     }
 
+    h2 {
+      font-size: 32px;
+    }
+
     .controls {
       margin-bottom: 50px;
+      font-size: 24px;
+    }
+    .styleMsg {
+      font-size: 20px;
     }
 
     input {
       width:100px;
     }
+    img {
+      background-color: var(--first-bgc);
+      padding: var(--first-padding);
+      margin-top: 20px;
+    }
+
   </style>
 
   <script>
-  </script>
+  const image = document.querySelector('img');
+  const inputs = Array.from(document.querySelector('input'));
+  const spacingRange = document.querySelector('input[name="spacing"]');
+  const blurRange = document.querySelector('input[name="blur"]');
+  const colorPanel = document.querySelector('input[name="base"]');
+  const styleContainer = document.querySelector('.styleMsg');
 
+  inputs.forEach(inp => inp.addEventListener('mousemove', showStyle));
+  function showStyle(e) {
+    styleContainer.innerHTML = "img { padding: " + `${e.target.value}`
+      + "px; filter: blur(" + `${ e.target.value}` + "px); background:"
+      + `${ e.target.value }` + "; }";
+  }
+
+  spacingRange.addEventListener('change', changeSpacing);
+  spacingRange.addEventListener('mousemove', changeSpacing);
+  function changeSpacing(e) {
+    image.style.padding = `${ e.target.value }` + 'px';
+  }
+
+  blurRange.addEventListener('change', changeBlur);
+  blurRange.addEventListener('mousemove', changeBlur);
+  function changeBlur(e) {
+    image.style.filter = "blur(" + `${ e.target.value}` + "px";
+  }
+
+  colorPanel.addEventListener('change', changeBgColor);
+  function changeBgColor(e) {
+    image.style.background = `${ e.target.value }`;
+  }
+  </script>
 </body>
 </html>
