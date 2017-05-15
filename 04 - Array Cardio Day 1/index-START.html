@@ -5,7 +5,7 @@
   <title>Array Cardio 💪</title>
 </head>
 <body>
-  <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
+  <p><em>按 F12 打开 JavaScript 控制台查看输出结果，若无结果，刷新页面试试~</em> 💁</p>
   <script>
     // Get your shorts on - this is an array workout!
     // ## Array Cardio Day 1
@@ -33,29 +33,53 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    console.log('%c1. 生于1500s的发明家：','font-size: 20px; color: #269186; font-weight: bold;')
+    const bornAfter1500 = inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600);
+    console.table(bornAfter1500);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    console.log('%c2. 输出他们的名字：','font-size: 20px; color: #269186; font-weight: bold;')
+    const inventorName = inventors.map(inventor => inventor['first'] + ' ' + inventor['last']);
+    console.log(inventorName);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    console.log('%c3. 从老到年轻排序：','font-size: 20px; color: #269186; font-weight: bold;')
+    const InventorSort = inventors.sort((prev, next) => next.year - prev.year);
+    console.table(InventorSort);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    console.log('%c4. 一共活了多少年？','font-size: 20px; color: #269186; font-weight: bold;')
+    const howManyyear = inventors.reduce((cur, next) => cur +=(next.passed - next.year), 0);
+    console.log('发明家年龄加起来一共活了 ' + howManyyear + ' 年。');
 
     // 5. Sort the inventors by years lived
-
+    console.log('%c5. 谁活得长？','font-size: 20px; color: #269186; font-weight: bold;')
+    const whoLiveLong = inventors.sort((a, b) => (b.passed - b.year) - (a.passed - a.year));
+    console.table(whoLiveLong);
+    console.log('活的最长的人是：' + whoLiveLong[0].first + ' ' + whoLiveLong[0].last +
+      '，他一共活了 ' + (whoLiveLong[0].passed - whoLiveLong[0].year) + ' 年。');
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    console.log('%c7. 按字母顺序排序？','font-size: 20px; color: #269186; font-weight: bold;')
+    const AlphabeticallyOrder = inventors.sort((prev, next) => prev.last.charCodeAt(0) - next.last.charCodeAt(0));
+    console.table(AlphabeticallyOrder);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
+    console.log('%c8. 归并数组中的相同元素：','font-size: 20px; color: #269186; font-weight: bold;')
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const sumItAll = data.reduce((dataObj, item) => {
+      !dataObj[item] ? dataObj[item] = 1 : dataObj[item]++;
+      return dataObj;
+    }, {})
+    console.log(sumItAll);
   </script>
 </body>
 </html>
