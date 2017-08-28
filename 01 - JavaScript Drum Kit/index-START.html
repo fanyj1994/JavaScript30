@@ -60,8 +60,8 @@
 
   function playSound(e) {
     //选出与按下键位相匹配的div与声音
-    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    const audio  = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key   = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
 
     if(!audio) return;  //不存在声音则返回
     audio.currentTime = 0;  //每次触发，音乐都从开头播放
@@ -70,7 +70,7 @@
   }
 
   const keys = Array.from(document.querySelectorAll('.key'));  //将所有的div放入一个数组
-  //每次transition动画结束的时候触发removeTransition事件
+  //每次 transition 动画结束的时候触发 removeTransition 事件
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
   function removeTransition(e) {

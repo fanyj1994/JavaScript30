@@ -6,17 +6,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <form class="search-form">
-    <input type="text" class="search" placeholder="City or State">
+    <input type="text" class="search" placeholder="搜索古诗词">
     <ul class="suggestions">
-      <li>Filter for a city</li>
-      <li>or a state</li>
+      <li>输入关键词，找诗词</li>
+      <li></li>
     </ul>
   </form>
 <script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const endpoint = 'https://gist.githubusercontent.com/soyaine/81399bb2b24ca1bb5313e1985533c640/raw/bdf7df2cbcf70706c4a5e51a7dfb8c933ed78878/TangPoetry.json';
+
+const poetryArr = [];
+
+fetch(endpoint)
+.then(blob => blob.json())
+.then(data => potryArr.push(...data));
+
+const searchBox = document.querySelector('.search');
+const poetryList = document.querySelector('.suggestions');
+
+function getPoetries(e) {
+  potryArr.match(/e.target.value/)
+}
+
+searchBox.addEventListener('change', getPoetries);
 
 </script>
-  </body>
+</body>
 </html>

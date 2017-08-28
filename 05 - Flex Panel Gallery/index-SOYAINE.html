@@ -67,19 +67,19 @@
 		justify-content: center;
 		align-items: center;
     }
-	  
+
 	  .panel > *:first-child {
 		  transform: translateY(-100%);
 	  }
-	  
+
 	  .panel.open-actived > *:first-child {
 		  transform: translateY(0);
 	  }
-	  
+
 	   .panel > *:last-child {
 		  transform: translateY(100%);
 	  }
-	  
+
 	   .panel.open-actived > *:last-child {
 		  transform: translateY(0);
 	  }
@@ -137,19 +137,19 @@
 
   <script>
 	  const panels = document.querySelectorAll('.panel');
-	  
+
 	  function toggleOpen() {
 		  this.classList.toggle('open');
 	  }
-	  
+	   
 	  function toggleWord(e) {
 		   console.log(e.propertyName);
 		  if(e.propertyName.includes('flex')){
 			  this.classList.toggle('open-actived');
 		  }
-		 
+
 	  }
-	  
+
 	  panels.forEach(panel => panel.addEventListener('click', toggleOpen));
   	  panels.forEach(panel => panel.addEventListener('transitionend', toggleWord));
 </script>
