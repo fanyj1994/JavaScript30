@@ -7,7 +7,7 @@
 </head>
 <body>
   <form class="search-form">
-    <input type="text" class="search" placeholder="搜索古诗词">
+    <input type="text" autofocus class="search" placeholder="搜索古诗词">
     <ul class="suggestions">
       <li>输入关键词，找诗词</li>
       <li></li>
@@ -20,17 +20,42 @@ const poetryArr = [];
 
 fetch(endpoint)
 .then(blob => blob.json())
-.then(data => potryArr.push(...data));
+.then(data => {
+  poetryArr.push(...data)
+  insertPoetry(poetryArr)
+});
 
 const searchBox = document.querySelector('.search');
 const poetryList = document.querySelector('.suggestions');
 
+// 创建元素
+function insertPoetry(poetryData) {
+  let poetryItem = poetryData.map((data) => {
+    return `
+      <li>
+        <span class="poet"> ${data.detail_text}</span>
+        <span class="title">${data.detail_author} - ${data.title}</span>
+      </li>
+    `
+  }).join('')
+  // console.log(poetryItem)
+  poetryList.innerHTML = poetryItem
+}
+
+// 匹配选中项
 function getPoetries(e) {
-  potryArr.match(/e.target.value/)
+  let chosePoetryArray = poetryArr.filter(item => {
+    const keywords = e.target.value
+    let author = item.detail_author.join('')
+    return item.detail_text.match(keywords) || item.title.match(keywords) 
+    || author.match(keywords)
+  })
+  console.log(chosePoetryArray)
+  insertPoetry(chosePoetryArray)
 }
 
 searchBox.addEventListener('change', getPoetries);
-
+searchBox.addEventListener('keyup', getPoetries);
 </script>
 </body>
 </html>

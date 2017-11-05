@@ -46,7 +46,7 @@
 	3. 构造 HTML 标签数据
 	4. 将匹配值的 HTML 标签放入 `<ul>` 中
 
-## 相关知识
+## 相关知识 
 
 ### [Fetch API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
 
@@ -119,8 +119,8 @@ arr1.push(...arr2);
 这一部分用到的语句很简单，但都用了 ES6 的语法，所以不熟悉 ES6 的话需要时间适应一下。
 
 ````js
-    const endpoint = 'https://raw.githubusercontent.com/soyaine/FE-Practice/f438d3bdf099461f88322b1b1f20c9d58f66f1ec/TangPoetryCut.json';
-    const  poetrys = [];
+    const endpoint = ****'https://raw.githubusercontent.com/soyaine/FE-Practice/f438d3bdf099461f88322b1b1f20c9d58f66f1ec/TangPoetryCut.json';
+    const  poetrys = [];****
     fetch(endpoint)
 		.then(blob => blob.json())
 		.then(data => poetrys.push(...data));
