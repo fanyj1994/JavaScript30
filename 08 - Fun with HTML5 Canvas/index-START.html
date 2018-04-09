@@ -5,13 +5,81 @@
   <title>HTML5 Canvas</title>
 </head>
 <body>
-<canvas id="draw" width="800" height="800"></canvas>
+<h1>拖动鼠标查看效果</h1>
+<canvas id="draw" width="800" height="800" style="overflow: hidden;"></canvas>
 <script>
+const canvas = document.querySelector('#draw');
+let cx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let hue = 0;
+let lastX = 0;
+let lastY = 0;
+let allowDraw = false;
+let direction = true;
+cx.lineCap = 'round';
+cx.lineJoin = 'round';
+cx.lineWidth = 60;
+
+function drawLine(e) {
+
+  if (!allowDraw) return;
+
+  if(e.type === "mousemove"){
+    x = e.offsetX;
+    y = e.offsetY;
+  }
+  
+  if(cx.lineWidth > 80 || cx.lineWidth < 10) {
+			direction = !direction;
+		} 
+		if (direction) {
+			cx.lineWidth++;
+		} else {
+			cx.lineWidth--;
+		}
+
+  cx.strokeStyle = `hsl(${ hue }, 90%, 50%)`;	
+  if(hue >= 360) hue = 0;
+  hue++;
+
+  cx.beginPath();
+  cx.moveTo(lastX, lastY);
+  cx.lineTo(x, y);
+  cx.stroke();
+  [lastX, lastY] = [x, y]; 
+}
+
+canvas.addEventListener('mousedown', (e) => {
+  allowDraw = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY]; 
+})
+
+canvas.addEventListener('mousemove', (e) => {
+  drawLine(e);
+})
+
+canvas.addEventListener('mouseup', (e) => {
+  allowDraw = false;
+  console.log(3) 
+})
+
 </script>
 
 <style>
   html, body {
     margin:0;
+  }
+  h1 {
+    font-size: 20px;
+    color: #333;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+  }
+  canvas {
+    overflow: hidden;
   }
 </style>
 
