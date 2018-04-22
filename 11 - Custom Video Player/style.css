@@ -67,7 +67,7 @@ body {
 }
 
 .player:hover .progress {
-  height:15px;
+  height:10px;
 }
 
 .player__controls > * {
@@ -93,7 +93,6 @@ body {
 }
 
 /* unholy css to style input type="range" */
-
 input[type=range] {
   -webkit-appearance: none;
   background:transparent;
@@ -123,7 +122,7 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -3.5px;
   box-shadow:0 0 2px rgba(0,0,0,0.2);
 }
-input[type=range]:focus::-wefbkit-slider-runnable-track {
+input[type=range]:focus::-webkit-slider-runnable-track {
   background: #bada55;
 }
 input[type=range]::-moz-range-track {
@@ -142,4 +141,16 @@ input[type=range]::-moz-range-thumb {
   border-radius: 50px;
   background: #ffc600;
   cursor: pointer;
+}
+
+label[for="rate"] {
+  position: relative;
+}
+
+input[name="playbackRate"] {
+  transform: rotate(-90deg);
+  display: none;
+}
+label[for="rate"]:hover input {
+  display: block;
 }
